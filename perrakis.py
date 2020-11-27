@@ -71,8 +71,10 @@ def compute_perrakis_estimate(marginal_sample, lnlikefunc, lnpriorfunc,
 
     ##
     # Compute lnprior and likelihood in marginal sample.
-    log_prior = lnpriorfunc(marginal_sample, *lnpriorargs)
-    log_likelihood = lnlikefunc(marginal_sample, *lnlikeargs)
+    lnp = lambda theta: lnpriorfunc(theta, *lnpriorargs)
+    lnl = lambda theta: lnlikefunc(theta, *lnlikeargs)
+    log_prior = np.array(list(map(lnp, marginal_sample)))
+    log_likelihood = np.array(list(map(lnl, marginal_sample)))
     ##
 
     # Mask values with zero likelihood (a problem in lnlike)

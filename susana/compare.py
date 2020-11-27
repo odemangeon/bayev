@@ -2,7 +2,7 @@ import os
 import numpy as np
 import pickle
 from math import log, pi
-from  tools import emcee_perrakis as perry
+from tools import emcee_perrakis as perry
 import celerite
 from celerite import terms
 
@@ -59,15 +59,15 @@ if __name__ == "__main__":
         #result =  perry(sampler, nsamples=500, bi=burnin,cind=cind)
 
 
-        result = np.zeros((2,ntrys))
+        result = np.zeros((2, ntrys))
 
-        for ii in range(0,ntrys):
+        for ii in range(ntrys):
             result[:,ii] = perry(sampler, nsamples=3000, bi=burnin,cind=cind)
             if ii % 100 == 0: print(ii)
 
 
         #print(result)
-        for i in range(0,ntrys):
+        for i in range(ntrys):
             print(result[0,i], result[1,i] )
 
         '''
